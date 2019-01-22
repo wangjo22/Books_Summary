@@ -1,4 +1,4 @@
-# Item 2: Prefer `const`, `enum`, and `inline` to `#define`.
+# Item 2: Prefer `const`, `enum`, and `inline` to `#define`
 > Prefer the compiler to the preprocessor
 
 ```c++
@@ -18,14 +18,14 @@ When replacing #defines with constants, two special cases are woth mentioning.
 ```C++
 const char * const authorName = "Scott Meyers";
 ```
-** string objects are generally preferable to their char* based progenitors, so authorName is often better defined this way:
+string objects are generally preferable to their char* based progenitors, so authorName is often better defined this way:
 ```C++
 const std::string authorName("Scott Meyers");
 ```
 
 * 2. class-specific constants. 
-** To limit, the scope of a constant to a class, you must make it a member.
-** To ensure there's at most one copy of the constant, you must make it a static member
+To limit, the scope of a constant to a class, you must make it a member.
+To ensure there's at most one copy of the constant, you must make it a static member
 ```C++
 class GamePlayer 
 {
@@ -102,6 +102,6 @@ There's no need to parenthesize parameters inside the function body, no need to 
 
 
 
-# Thisgs to Remember
-## For simple constants, prefer const objects or enums to #defines.
-## For function-like macros, prefer inline functions to #defines.
+## Thisgs to Remember
+* For simple constants, prefer const objects or enums to #defines
+* For function-like macros, prefer inline functions to #defines
