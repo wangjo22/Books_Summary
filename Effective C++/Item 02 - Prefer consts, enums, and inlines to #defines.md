@@ -13,27 +13,28 @@ const double AspectRAtio = 1.653;
 `AspectRatio` is definitely seen by compilers and is certainly entered into their symbol tables.
 In the case of a floating point constant, use of the constant may yield smaller code than using a #define because the constant `AspectRatio` should never result in more than on copy. 
 
-When replacing #defines with constants, two special cases are woth mentioning. 
-* 1. Define constant pointers
-```C++
-const char * const authorName = "Scott Meyers";
-```
-string objects are generally preferable to their char* based progenitors, so authorName is often better defined this way:
-```C++
-const std::string authorName("Scott Meyers");
-```
 
-* 2. class-specific constants. 
-To limit, the scope of a constant to a class, you must make it a member.
-To ensure there's at most one copy of the constant, you must make it a static member
-```C++
-class GamePlayer 
-{
-private:
-    static const int NumTurns = 5;    // Constant declaration
-    int scores[NumTurns];
-}
-```
+When replacing #defines with constants, two special cases are woth mentioning. 
+1. Define constant pointers
+    ```C++
+    const char * const authorName = "Scott Meyers";
+    ```
+    string objects are generally preferable to their char* based progenitors, so authorName is often better defined this way:
+    ```C++
+    const std::string authorName("Scott Meyers");
+    ```
+
+2. class-specific constants. 
+    To limit, the scope of a constant to a class, you must make it a member.
+    To ensure there's at most one copy of the constant, you must make it a static member
+    ```C++
+    class GamePlayer 
+    {
+    private:
+        static const int NumTurns = 5;    // Constant declaration
+        int scores[NumTurns];
+    }
+    ```
 
 
 Usually, C++ requires that you provide a definition for anything you use, but class-specific constants that are static and of integral type(e.g., integers, chars, bools) are an exception. As long as you don't take their address, you can declare them and use them without providing a definition. 
@@ -74,8 +75,7 @@ private:
 }
 ```
 The enum hack is worth knowing about for several reasons. 
-1. It behaves in some ways more like a #define than a const does, and sometimes that's what you want. 
-Like #define, it's not leagal to take the address of an enum and enums never result in unnecessary memory allocation.
+1. It behaves in some ways more like a #define than a const does, and sometimes that's what you want. Like #define, it's not leagal to take the address of an enum and enums never result in unnecessary memory allocation.
 2. It is purely pragmatic.
 
 Another common isuse of the #define is using it to implement macros that look like functions but that don't incur the overhead of a function call. 
