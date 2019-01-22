@@ -14,7 +14,7 @@ const double AspectRAtio = 1.653;
 In the case of a floating point constant, use of the constant may yield smaller code than using a #define because the constant `AspectRatio` should never result in more than on copy. 
 
 
-When replacing #defines with constants, two special cases are woth mentioning. 
+When replacing #defines with constants, two special cases are worth mentioning. 
 1. Define constant pointers
     ```C++
     const char * const authorName = "Scott Meyers";
