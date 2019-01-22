@@ -1,30 +1,31 @@
-## Item 2: Prefer const, enum, and inline to #define.
+# Item 2: Prefer `const`, `enum`, and `inline` to `#define`.
 > Prefer the compiler to the preprocessor
 
 ```c++
 #define ASPECT_RATIO 1.653
 ```
-ASPECT_RATIO may not get entered into the symbol table. Then, the error message may refer to 1.653, not ASPECT_RATIO.
+`ASPECT_RATIO` may not get entered into the symbol table. Then, the error message may refer to 1.653, not `ASPECT_RATIO`.
+
 
 ```C++
 const double AspectRAtio = 1.653;
 ```
-AspectRatio is definitely seen by compilers and is certainly entered into their symbol tables.
-In the case of a floating point constant, use of the constant may yield smaller code than using a #define because the constant AspectRatio should never result in more than on copy. 
+`AspectRatio` is definitely seen by compilers and is certainly entered into their symbol tables.
+In the case of a floating point constant, use of the constant may yield smaller code than using a #define because the constant `AspectRatio` should never result in more than on copy. 
 
 When replacing #defines with constants, two special cases are woth mentioning. 
-1. Define constant pointers
+* 1. Define constant pointers
 ```C++
 const char * const authorName = "Scott Meyers";
 ```
-string objects are generally preferable to their char* based progenitors, so authorName is often better defined this way:
+** string objects are generally preferable to their char* based progenitors, so authorName is often better defined this way:
 ```C++
 const std::string authorName("Scott Meyers");
 ```
 
-2. class-specific constants. 
-To limit, the scope of a constant to a class, you must make it a member.
-To ensure there's at most one copy of the constant, you must make it a static member
+* 2. class-specific constants. 
+** To limit, the scope of a constant to a class, you must make it a member.
+** To ensure there's at most one copy of the constant, you must make it a static member
 ```C++
 class GamePlayer 
 {
@@ -33,6 +34,8 @@ private:
     int scores[NumTurns];
 }
 ```
+
+
 Usually, C++ requires that you provide a definition for anything you use, but class-specific constants that are static and of integral type(e.g., integers, chars, bools) are an exception. As long as you don't take their address, you can declare them and use them without providing a definition. 
 If you do take the address of a class constant, or if your compiler incorrectly insists on a definition even if you don't take the address, you provide a seperate definition like this:
 ```C++
